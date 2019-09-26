@@ -57,7 +57,16 @@ ODFLAGS = -S
 SOURCES=$(shell find ./ -type f -iname '*.c')
 OBJECTS=$(foreach x, $(basename $(SOURCES)), $(x).o)
 
+
+
 all: main.bin size
+
+bootloader: CFLAGS += -DUSE_WITH_BOOTLOADER
+ifdef USE_WITH_BOOTLOADER
+$(error USE_WITH_BOOTLOADER is not set)
+LFLAGS += -Xlinker --defsym=USE_WITH_BOOTLOADER=1
+endif
+bootloader: all
 
 clean: 
 	rm -f main.lst main.elf main.bin
@@ -79,7 +88,7 @@ main.bin: main.elf
 
 main.elf: $(OBJECTS) startup_stm32f10x_md.o
 	@echo "..linking"
-	$(LD)  $^ $(LFLAGS) -o $@
+	$(LD) $^ $(LFLAGS) -o $@
 
 %.o: %.c
 	@echo ".compiling"
