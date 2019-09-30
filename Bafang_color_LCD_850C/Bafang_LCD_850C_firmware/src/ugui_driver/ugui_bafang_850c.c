@@ -31,6 +31,7 @@
 #include "../ugui_driver/ugui_bafang_850c.h"
 #include "../pins.h"
 #include "../timers.h"
+#include "../lcd.h"
 
 #define HDP (DISPLAY_WIDTH - 1)
 #define VDP (DISPLAY_HEIGHT - 1)
@@ -98,6 +99,9 @@ lcd_IC_t detect_lcd_type()
 }
 
 void bafang_500C_lcd_init() {
+    volatile l3_vars_t *p_l3_output_vars;
+    p_l3_output_vars = get_l3_vars();
+
     // next step is needed to have PB3 and PB4 working as GPIO
     /* Disable the Serial Wire Jtag Debug Port SWJ-DP */
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
@@ -207,10 +211,19 @@ void bafang_500C_lcd_init() {
      */
     // Configure ILI9481 display
     // borrowed from https://github.com/Bodmer/TFT_HX8357_Due/blob/master/TFT_HX8357_Due.cpp as a starting point
-    lcd_IC_t type = detect_lcd_type();
-    if (type == LCD_Unknown) {
-        // TODO: panic here
-        while (1);
+
+    // NOTE on 2019.09.27: seems that this detection does not work
+//    lcd_IC_t type = detect_lcd_type();
+//    if (type == LCD_Unknown) {
+//        // TODO: panic here
+//        while (1);
+//    }
+    // let user select on display configurations the LCD type
+    lcd_IC_t type;
+    if (p_l3_output_vars->ui8_lcd_vertical_flip) {
+        type = LCD_ST7796;
+    } else {
+        type = LCD_ILI9481;
     }
 
     if (type == LCD_ILI9481) {

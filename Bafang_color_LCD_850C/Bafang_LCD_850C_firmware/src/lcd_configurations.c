@@ -148,6 +148,7 @@ void display_units(struct_menu_data *p_menu_data);
 void display_buttons_up_down_invert(struct_menu_data *p_menu_data);
 void display_brightness_backlight_off(struct_menu_data *p_menu_data);
 void display_brightness_backlight_on(struct_menu_data *p_menu_data);
+void display_lcd_vertical_flip(struct_menu_data *p_menu_data);
 void display_auto_power_off(struct_menu_data *p_menu_data);
 void display_reset_to_defaults(struct_menu_data *p_menu_data);
 void offroad_title(struct_menu_data *p_menu_data);
@@ -237,6 +238,7 @@ void (*p_items_array[])(struct_menu_data *p_menu_data) =
   display_brightness_backlight_off,
   display_brightness_backlight_on,
   display_auto_power_off,
+  display_lcd_vertical_flip,
   display_reset_to_defaults,
   offroad_title,
   offroad_active_on_startup,
@@ -326,15 +328,16 @@ uint8_t items_array_is_title[] =
   0,
   0,
   0,
-  1,
+  0,
+  1, // offroad_title
   0,
   0,
   0,
   0,
-  1,
+  1, // various_title
   0,
   0,
-  1,
+  1, // technical_data_title
   0,
   0,
   0,
@@ -1770,6 +1773,31 @@ void display_auto_power_off(struct_menu_data *p_menu_data)
 
   item_set_strings("Auto power off", "time (minutes)", p_menu_data);
   item_var_set_number(&lcd_var_number, p_menu_data);
+}
+
+void display_lcd_vertical_flip(struct_menu_data *p_menu_data)
+{
+  uint8_t ui8_lcd_vertical_flip = p_m_l3_vars->ui8_lcd_vertical_flip;
+
+  var_number_t lcd_var_number =
+  {
+    .p_var_number = &ui8_lcd_vertical_flip,
+    .ui8_size = 8,
+    .ui8_number_digits = 1,
+    .ui8_decimal_digit = 0,
+    .ui32_max_value = 1,
+    .ui32_min_value = 0,
+    .ui32_increment_step = 1
+  };
+
+  item_set_strings("LCD vertical", "flip", p_menu_data);
+  item_var_set_strings(&lcd_var_number, p_menu_data, "default\ninvert");
+
+  if (ui8_lcd_vertical_flip != p_m_l3_vars->ui8_lcd_vertical_flip)
+  {
+    p_m_l3_vars->ui8_lcd_vertical_flip = ui8_lcd_vertical_flip;
+    lcd_power_off();
+  }
 }
 
 void display_reset_to_defaults(struct_menu_data *p_menu_data)

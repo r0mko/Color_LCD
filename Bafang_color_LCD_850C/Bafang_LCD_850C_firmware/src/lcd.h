@@ -167,6 +167,7 @@ typedef struct l3_vars_struct
   uint8_t ui8_lcd_power_off_time_minutes;
   uint8_t ui8_lcd_backlight_on_brightness;
   uint8_t ui8_lcd_backlight_off_brightness;
+  uint8_t ui8_lcd_vertical_flip;
   uint8_t ui8_offroad_feature_enabled;
   uint8_t ui8_offroad_enabled_on_startup;
   uint8_t ui8_offroad_speed_limit;
@@ -238,5 +239,6 @@ volatile l3_vars_t* get_l3_vars(void);
 volatile lcd_vars_t* get_lcd_vars(void);
 void lcd_print_number(print_number_t* number);
 void lcd_draw_main_menu_mask(void);
+void lcd_power_off(void);
 
 #endif /* LCD_H_ */

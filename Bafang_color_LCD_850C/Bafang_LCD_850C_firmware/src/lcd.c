@@ -75,7 +75,6 @@ void lcd_main_screen(void);
 uint8_t first_time_management(void);
 void assist_level_state(void);
 void power_off_management(void);
-void lcd_power_off(uint8_t updateDistanceOdo);
 void l2_low_pass_filter_battery_voltage_current_power(void);
 void update_menu_flashing_state(void);
 void calc_battery_soc_watts_hour(void);
@@ -787,11 +786,11 @@ void power_off_management(void)
     buttons_get_up_state() == 0 &&
     buttons_get_down_state() == 0)
   {
-    lcd_power_off(1);
+    lcd_power_off();
   }
 }
 
-void lcd_power_off(uint8_t updateDistanceOdo)
+void lcd_power_off(void)
 {
 //  if (updateDistanceOdo)
 //  {
@@ -995,7 +994,7 @@ static void automatic_power_off_management(void)
       ui8_lcd_power_off_time_counter_minutes++;
       if(ui8_lcd_power_off_time_counter_minutes >= l3_vars.ui8_lcd_power_off_time_minutes)
       {
-        lcd_power_off(1);
+        lcd_power_off();
       }
     }
   }

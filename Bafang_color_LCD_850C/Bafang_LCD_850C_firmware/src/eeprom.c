@@ -84,6 +84,7 @@ eeprom_data_t m_eeprom_data_defaults =
   .ui8_lcd_power_off_time_minutes = DEFAULT_VALUE_LCD_POWER_OFF_TIME,
   .ui8_lcd_backlight_on_brightness = DEFAULT_VALUE_LCD_BACKLIGHT_ON_BRIGHTNESS,
   .ui8_lcd_backlight_off_brightness = DEFAULT_VALUE_LCD_BACKLIGHT_OFF_BRIGHTNESS,
+  .ui8_lcd_vertical_flip = DEFAULT_VALUE_LCD_VERTICAL_FLIP,
   .ui16_battery_pack_resistance_x1000 = DEFAULT_VALUE_BATTERY_PACK_RESISTANCE,
   .ui8_offroad_feature_enabled = DEFAULT_VALUE_OFFROAD_FEATURE_ENABLED,
   .ui8_offroad_enabled_on_startup = DEFAULT_VALUE_OFFROAD_MODE_ENABLED_ON_STARTUP,
@@ -269,6 +270,7 @@ void eeprom_init_variables(void)
   p_l3_output_vars->ui8_lcd_power_off_time_minutes = m_eeprom_data.ui8_lcd_power_off_time_minutes;
   p_l3_output_vars->ui8_lcd_backlight_on_brightness = m_eeprom_data.ui8_lcd_backlight_on_brightness;
   p_l3_output_vars->ui8_lcd_backlight_off_brightness = m_eeprom_data.ui8_lcd_backlight_off_brightness;
+  p_l3_output_vars->ui8_lcd_vertical_flip = m_eeprom_data.ui8_lcd_vertical_flip;
   p_l3_output_vars->ui16_battery_pack_resistance_x1000 = m_eeprom_data.ui16_battery_pack_resistance_x1000;
   p_l3_output_vars->ui8_offroad_feature_enabled = m_eeprom_data.ui8_offroad_feature_enabled;
   p_l3_output_vars->ui8_offroad_enabled_on_startup = m_eeprom_data.ui8_offroad_enabled_on_startup;
@@ -359,6 +361,7 @@ void eeprom_write_variables(void)
   m_eeprom_data.ui8_lcd_power_off_time_minutes = p_l3_output_vars->ui8_lcd_power_off_time_minutes;
   m_eeprom_data.ui8_lcd_backlight_on_brightness = p_l3_output_vars->ui8_lcd_backlight_on_brightness;
   m_eeprom_data.ui8_lcd_backlight_off_brightness = p_l3_output_vars->ui8_lcd_backlight_off_brightness;
+  m_eeprom_data.ui8_lcd_vertical_flip = p_l3_output_vars->ui8_lcd_vertical_flip;
   m_eeprom_data.ui16_battery_pack_resistance_x1000 = p_l3_output_vars->ui16_battery_pack_resistance_x1000;
   m_eeprom_data.ui8_offroad_feature_enabled = p_l3_output_vars->ui8_offroad_feature_enabled;
   m_eeprom_data.ui8_offroad_enabled_on_startup = p_l3_output_vars->ui8_offroad_enabled_on_startup;

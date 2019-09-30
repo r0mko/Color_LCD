@@ -48,6 +48,7 @@ typedef struct eeprom_data
   uint8_t ui8_lcd_power_off_time_minutes;
   uint8_t ui8_lcd_backlight_on_brightness;
   uint8_t ui8_lcd_backlight_off_brightness;
+  uint8_t ui8_lcd_vertical_flip;
   uint16_t ui16_battery_pack_resistance_x1000;
   uint8_t ui8_offroad_feature_enabled;
   uint8_t ui8_offroad_enabled_on_startup;

@@ -14,8 +14,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # uncomment next lines to build for bootloader
-CFLAGS = -DUSE_WITH_BOOTLOADER
-LFLAGS = -Xlinker --defsym=USE_WITH_BOOTLOADER=1
+#CFLAGS = -DUSE_WITH_BOOTLOADER
+#LFLAGS = -Xlinker --defsym=USE_WITH_BOOTLOADER=1
 
 TCPREFIX  = arm-none-eabi-
 CC      = $(TCPREFIX)gcc
